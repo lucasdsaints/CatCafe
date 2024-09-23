@@ -1,9 +1,22 @@
-import "./Booking.scss";
+import Logo from "../components/icons/Logo";
+import LinkButton from "../components/LinkButton";
+
+import "./Success.scss";
 
 export default function Booking() {
-  return (<div className="success">
-    <h1>Booking page</h1>
+  return (
+  <div className="success">
+    <Logo dark />
 
-    <p>Click to go to the about page.</p>
-  </div>)
+    <img src="/cat.png" alt="Desenho de um gato feliz segurando uma xícara de café" />
+
+    <h1 className="bold">
+      Reserva concluída com sucesso!
+    </h1>
+
+    <LinkButton to="/">
+      Voltar para página inicial
+    </LinkButton>
+  </div>
+  )
 }

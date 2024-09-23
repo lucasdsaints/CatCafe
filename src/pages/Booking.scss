@@ -1,3 +1,106 @@
 .booking {
+  position: relative;
+  min-height: 100vh;
+  padding: 64px;
 
+  &__go-back {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 18px;
+    color: var(--common-text);
+
+    > svg {
+      margin-right: 8px;
+    }
+  }
+
+  &__main-section {
+    color: var(--common-text);
+    max-width: 590px;
+  }
+
+  h1 {
+    font-size: 42px;
+    line-height: 50px;
+    margin: 16px 0 32px;
+
+    > span {
+      color: var(--highlight-color);
+    }
+  }
+
+  &__page-image {
+    max-height: calc(100% - 200px);
+    width: 50%;
+    object-fit: contain;
+    object-position: right;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  &__top-right-detail {
+    background-image: url("~/public/top-right-detail.svg");
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 390px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: -1;
+    text-align: right;
+
+    > svg {
+      margin-top: 40px;
+      margin-left: auto;
+      margin-right: 52px;
+    }
+  }
+
+  &__form {
+    // margin-top: 32px;
+  }
+
+  &__input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+
+    &:last-of-type {
+      margin-bottom: 32px;
+    }
+
+    > p  {
+      font-size: 12px;
+      color: var(--input-error);
+      margin-bottom: 12px;
+    }
+
+    > input {
+      border: 1px solid var(--input-border);
+      height: 48px;
+      border-radius: 24px;
+      color: var(--common-text);
+      font-family: 'Poppins', sans-serif;
+      padding: 0 16px;
+      background-color: transparent;
+    }
+
+    &--text input {
+      width: 330px;
+    }
+
+    &--numeric input {
+      max-width: 63px;
+      border-radius: 6px;
+    }
+
+    input[type=date]::-webkit-calendar-picker-indicator, input[type=time]::-webkit-calendar-picker-indicator {
+      display: none;
+    }
+  }
 }

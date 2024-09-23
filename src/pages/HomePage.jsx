@@ -1,7 +1,9 @@
-import "./HomePage.scss";
 import PhoneIcon from "../components/icons/PhoneIcon";
 import MapLocationIcon from "../components/icons/MapLocationIcon";
 import Logo from "../components/icons/Logo";
+import LinkButton from "../components/LinkButton";
+
+import "./HomePage.scss";
 
 export default function HomePage() {
   return (
@@ -17,11 +19,9 @@ export default function HomePage() {
         <strong>Quem sabe, você não encontra um amigo especial para chamar de seu?</strong>
       </p>
 
-      <button
-        className="home-page__booking-button"
-      >
+      <LinkButton className="home-page__booking-button" to="/booking">
         Fazer uma reserva
-      </button>
+      </LinkButton>
     </section>
 
     <section className="home-page__contact-section">

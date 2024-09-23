@@ -6,6 +6,8 @@
   --light-text: #7E451F;
   --highlight-color: #FF8A00;
   --background-color: #FFEADA;
+  --input-border: #B27756;
+  --input-error: #d16246;
 }
 
 * {
@@ -29,10 +31,12 @@ button {
   font-size: 18px;
   line-height: 26px;
   background-color: var(--highlight-color);
-  padding: 8px 16px;
+  padding: 0 16px;
   border: none;
   border-radius: 32px;
   cursor: pointer;
+  min-width: 180px;
+  height: 48px;
 
   &:hover {
     filter: brightness(95%);

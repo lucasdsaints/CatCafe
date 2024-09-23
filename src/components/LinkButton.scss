@@ -1,0 +1,15 @@
+a.custom-link {
+  font-family: 'Poppins', sans-serif;
+  color: var(--common-text);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 26px;
+  background-color: var(--highlight-color);
+  padding: 0 16px;
+  border: none;
+  border-radius: 32px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
