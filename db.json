@@ -1,13 +1,13 @@
 {
   "bookingForm": [
     {
-      "id": "1",
+      "id": "name",
       "label": "Como podemos te chamar?",
       "placeholder": "Digite seu nome",
       "type": "text"
     },
     {
-      "id": "2",
+      "id": "phone",
       "label": "Qual o seu whatsapp?",
       "placeholder": "Digite seu número de whatsapp",
       "type": "text"
