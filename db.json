@@ -11,6 +11,30 @@
       "label": "Qual o seu whatsapp?",
       "placeholder": "Digite seu número de whatsapp",
       "type": "text"
+    },
+    {
+      "id": "email",
+      "label": "Qual o seu email?",
+      "placeholder": "Exemplo: cat@cafe.com.br",
+      "type": "email"
+    },
+    {
+      "id": "tablesCount",
+      "label": "Mesa pra quantas pessoas?",
+      "placeholder": "",
+      "type": "number"
+    },
+    {
+      "id": "date",
+      "label": "Quando vem nos visitar?",
+      "placeholder": "",
+      "type": "date"
+    },
+    {
+      "id": "time",
+      "label": "Que horas você vai chegar?",
+      "placeholder": "",
+      "type": "time"
     }
   ]
 }

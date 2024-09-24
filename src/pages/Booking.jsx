@@ -4,8 +4,12 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { getBookingForm } from "../services/api";
 
 import "./Booking.scss";
+import { useEffect, useState } from "react";
 
 const createBookingSchema = z.object({
   name: z.string().min(1, 'Nome é obrigatório'),
@@ -19,17 +23,31 @@ const createBookingSchema = z.object({
 });
 
 export default function Booking() {
-  const { register, handleSubmit, formState: { errors, ...rest }, getValues } = useForm({
-    resolver: zodResolver(createBookingSchema),
-    defaultValues: {
-      name: '',
-      phone: '',
-      email: '',
-      tablesCount: 1,
-      date: '',
-      hours: '',
-    }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isDirty, isValid }
+  } = useForm({
+    mode: "onChange",
+    resolver: zodResolver(createBookingSchema)
   });
+  const [fields, setFields] = useState([]);
+  const [loading, setLoading] = useState(true)
+
+  async function getFormFields() {
+    try {
+      const { data } = await getBookingForm();
+      setFields(data);
+    } catch {
+      console.error('Erro ao buscar campos do formulário');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    getFormFields();
+  }, []);
 
   function submitForm(data) {
     console.log(data);
@@ -48,47 +66,30 @@ export default function Booking() {
         Preencha os dados abertos para fazer sua <span>reserva</span>
       </h1>
 
-      <form className="booking__form" onSubmit={handleSubmit(submitForm)} >
-        <div className="semi-bold booking__input-wrapper booking__input-wrapper--text">
-          <label htmlFor="name">Como podemos te chamar?</label>
-          <input type="text" id="name" {...register("name")} />
-          {errors.name && <p>{errors.name.message}</p>}
-        </div>
+      <Form className="booking__form" onSubmit={handleSubmit(submitForm)}>
+        {loading && <p>Carregando formulário...</p>}
 
-        <div className="semi-bold booking__input-wrapper booking__input-wrapper--text">
-          <label htmlFor="phone">Qual o seu whatsapp?</label>
-          <input type="text" id="phone" {...register("phone")} />
-          {errors.phone && <p>{errors.phone.message}</p>}
-        </div>
+        {fields.map((field, index) => (
+          <Form.Group key={index}>
+            <Form.Label>{field.label}</Form.Label>
 
-        <div className="semi-bold booking__input-wrapper booking__input-wrapper--text">
-          <label htmlFor="email">Qual o seu email?</label>
-          <input type="text" id="email" {...register("email")} />
-          {errors.email && <p>{errors.email.message}</p>}
-        </div>
+            <Form.Control
+              type={field.type}
+              placeholder={field.placeholder}
+              {...register(field.id, { valueAsNumber: field.type === 'number' })}
+            />
 
-        <div className="semi-bold booking__input-wrapper booking__input-wrapper--numeric">
-          <label htmlFor="tablesCount">Mesa pra quantas pessoas?</label>
-          <input type="number" min={1} id="tablesCount" {...register("tablesCount")} />
-          {errors.tablesCount && <p>{errors.tablesCount.message}</p>}
-        </div>
+            {errors.name && <span>{errors.name.message}</span>}
+          </Form.Group>
+        ))}
 
-        <div className="semi-bold booking__input-wrapper booking__input-wrapper--date">
-          <label htmlFor="date">Quando vem nos visitar?</label>
-          <input type="date" id="date" {...register("date")} />
-          {errors.date && <p>{errors.date.message}</p>}
-        </div>
-
-        <div className="semi-bold booking__input-wrapper booking__input-wrapper--time">
-          <label htmlFor="hours">Que horas você vai chegar?</label>
-          <input type="time" id="hours" {...register("hours")} />
-          {errors.hours && <p>{errors.hours.message}</p>}
-        </div>
-
-        <button className="booking__confirm-button">
+        <Button
+          type="submit"
+          disabled={!isDirty || !isValid}
+        >
           Reservar
-        </button>
-      </form>
+        </Button>
+      </Form>
     </section>
 
     <img className="booking__page-image" src="/background-2.png" alt="Homem segurando um gato" />
